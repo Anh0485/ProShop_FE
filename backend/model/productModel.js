@@ -1,30 +1,73 @@
 import mongoose from "mongoose";
 
+const reviewSchema = mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    rating: {
+        type: Number,
+        required: true
+    },
+    comment: {
+        type: String,
+        required: true
+    },
+},{
+    timestamps: true
+})
 const productSchema = mongoose.Schema(
 {
-        
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        require: true,
+        ref: 'User',
+    },
     name: {
         type: String,
         require: true
     },
-    email: {
+    image: {
         type: String,
         require: true,
-        unique: true
     },
-    password: {
+    brand: {
         type: String,
         require: true
     },
-    isAdmin: {
-        type: Boolean,
+    category: {
+        type: String,
         require: true,
-        default: false
+    },
+    description: {
+        type: String,
+        require: true,
+    },
+    review:[reviewSchema],
+    rating: {
+        type: Number,
+        require: true,
+        default:0,
+    },
+    numReviews: {
+        type: Number,
+        require: true,
+        default:0,
+    },
+    price: {
+        type: Number,
+        require: true,
+        default:0,
+    },
+    countInStock: {
+        type: Number,
+        require: true,
+        default:0,
     },
 },{
     timestamps: true
 })
 
-const User = mongoose.model('User', userSchema)
+const Product = mongoose.model('Product', productSchema)
 
-export default User
+export default Product
